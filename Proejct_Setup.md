@@ -10,8 +10,10 @@
 
 ## Create module init files in both `tests/` and `lib/` directories
 
-; echo $null  >> tests/__init__.py
-; echo $null  >> lib/__init__.py
+```PS
+; New-Item -Path ./tests/__init__.py.py -ItemType File
+; New-Item -Path ./lib/__init__.py.py -ItemType File
+```
 
 ## These might seem pointless, but they're important for Python to find all of your files
 
@@ -21,7 +23,7 @@
 
 =============================== no tests ran in 0.01s ===============================
 
-# And create a repository for your changes
+## And create a repository for your changes
 
 ; git init .
 ; git add .
