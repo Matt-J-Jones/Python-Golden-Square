@@ -1,2 +1,2 @@
 def count_words(str):
-    return None
+    return len(str.split())
