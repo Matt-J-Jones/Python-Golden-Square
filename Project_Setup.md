@@ -11,8 +11,8 @@
 ## Create module init files in both `tests/` and `lib/` directories
 
 ```PS
-; New-Item -Path ./tests/__init__.py.py -ItemType File
-; New-Item -Path ./lib/__init__.py.py -ItemType File
+; New-Item -Path ./tests/__init__.py -ItemType File
+; New-Item -Path ./lib/__init__.py -ItemType File
 ```
 
 ## These might seem pointless, but they're important for Python to find all of your files
