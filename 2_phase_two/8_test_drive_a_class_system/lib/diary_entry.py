@@ -1,37 +1,24 @@
 class DiaryEntry:
-    # Public Properties:
-    #   title: a string
-    #   contents: a string
+    
+    def __init__(self, entry): # title, contents are strings
+        self.title = entry[0]
+        self.contents = entry[1]
+        self.current_chunk_flag = 0
 
-    def __init__(self, title, contents): # title, contents are strings
-        # Side-effects:
-        #   Sets the title and contents properties
-        pass
+    def format(self):
+        return f"{self.title}: {self.contents}"
 
     def count_words(self):
-        # Returns:
-        #   An integer representing the number of words in the contents
-        pass
+        return len(self.contents.split())
 
     def reading_time(self, wpm):
-        # Parameters:
-        #   wpm: an integer representing the number of words the user can read
-        #        per minute
-        # Returns:
-        #   An integer representing an estimate of the reading time in minutes
-        #   for the contents at the given wpm.
-        pass
+        return self.count_words() / wpm
 
     def reading_chunk(self, wpm, minutes):
-        # Parameters:
-        #   wpm: an integer representing the number of words the user can read
-        #        per minute
-        #   minutes: an integer representing the number of minutes the user has
-        #            to read
-        # Returns:
-        #   A string representing a chunk of the contents that the user could
-        #   read in the given number of minutes.
-        # If called again, `reading_chunk` should return the next chunk,
-        # skipping what has already been read, until the contents is fully read.
-        # The next call after that it should restart from the beginning.
-        pass
+        start = self.current_chunk_flag
+        end = start + (wpm * minutes)
+        split_contents = self.contents.split()
+        current_chunk = " ".join(split_contents[start:end])
+        self.current_chunk_flag = end
+        return current_chunk
+    
