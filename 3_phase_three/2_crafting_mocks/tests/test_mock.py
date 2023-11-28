@@ -1,4 +1,4 @@
-import pytest
+# import pytest
 from unittest.mock import Mock
 
 # Delete the lines starting with `@pytest.mark.skip` one by one as you work through.
