@@ -15,6 +15,21 @@
 ; New-Item -Path ./lib/__init__.py -ItemType File
 ```
 
+## To Install pipenv
+
+```PS
+; pip install pipenv
+; pipenv install requests
+; pipenv run python -c "import requests"
+```
+
+## To activate the virtual environment (Before Running Tests)
+
+```PS
+; pipenv shell
+; pytest
+```
+
 ## These might seem pointless, but they're important for Python to find all of your files
 
 ## Verify your setup by running pytest
