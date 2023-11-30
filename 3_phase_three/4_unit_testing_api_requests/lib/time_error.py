@@ -2,12 +2,13 @@ import time
 import requests
 
 class TimeError:
-    def __init__(self, requester):
+    def __init__(self, requester = requests, timer = time):
         self._requester = requester
+        self._time = timer
     # Returns difference in seconds between the time on an external server
     # and the time on this computer
     def error(self):
-        return self._get_server_time() - time.time()
+        return self._get_server_time() - self._time.time()
 
     # The underscore denotes this is a private method not to be called from the
     # outside. You also shouldn't stub it in your tests. So if your tests contain
@@ -16,3 +17,6 @@ class TimeError:
         response = self._requester.get("https://worldtimeapi.org/api/ip")
         json = response.json()
         return json["unixtime"]
+
+# time_error = TimeError()
+# print(time_error.error())
