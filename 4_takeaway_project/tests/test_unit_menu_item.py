@@ -26,5 +26,6 @@ def test_returns_formatted_item_with_2_decimal_places():
 def test_returns_item_name_price_availability_individually():
     menu_item = MenuItem("example item", 1.01, False)
     assert menu_item.return_price_as_string() == "1.01"
-    assert menu_item.returns_name() == "example item"
+    assert menu_item.return_name() == "example item"
     assert menu_item.return_status() == "Sold Out"
+    assert menu_item.return_price() == 1.01

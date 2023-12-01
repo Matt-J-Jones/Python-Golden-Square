@@ -16,10 +16,13 @@ class MenuItem:
             return str(temp_price[0] + "." + temp_price[1] + "0")
         return str(".".join(temp_price))
 
-    def returns_name(self):
+    def return_name(self):
         return self.name
 
     def return_status(self):
         if self.availability:
             return "Available"
         return "Sold Out"
+
+    def return_price(self):
+        return self.price
