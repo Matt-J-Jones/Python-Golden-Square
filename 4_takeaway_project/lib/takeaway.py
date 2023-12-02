@@ -1,5 +1,6 @@
-import csv
-from lib.menu_item import MenuItem
+from datetime import datetime, timedelta
+from twilio.rest import Client
+from . import keys
 
 class Takeaway:
     def __init__(self):
@@ -41,3 +42,16 @@ class Takeaway:
         if len(temp_price[1]) == 1:
             return str(temp_price[0] + "." + temp_price[1] + "0")
         return str(".".join(temp_price))
+
+    def tracking_and_confirmation(self, client = Client(keys.sid(), keys.token())):
+        current_time = datetime.now()
+        future_time = current_time + timedelta(minutes=15)
+        msg_body = f"Your order will arrive at {future_time.hour}:{future_time.minute}"
+
+        client.messages.create(
+        to=keys.to(),
+        from_=keys.sender(),
+        body=msg_body
+        )
+
+        return True

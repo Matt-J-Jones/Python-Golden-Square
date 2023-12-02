@@ -1,6 +1,6 @@
+from unittest.mock import Mock, patch
 from lib.takeaway import Takeaway
 import pytest
-from unittest.mock import Mock
 
 example_menu_item_rice = Mock()
 example_menu_item_rice.return_formatted_item.return_value = "Rice: £1.50, Available"
@@ -48,3 +48,24 @@ def test_adds_items_returns_confirmation():
     takeaway.add_item_to_order(example_menu_item_rice)
     takeaway.add_item_to_order(example_menu_item_coke)
     assert takeaway.confirm_order() == "Rice, Rice - Total: £3.00"
+
+@patch('lib.takeaway.keys') 
+def test_adds_items_returns_confirmation_text(mock_keys):
+    mock_keys = Mock()
+    mock_keys.sid.return_value = 'mock_sid'
+    mock_keys.token.return_value = 'mock_token'
+    mock_keys.to.return_value = 'mock_to'
+    mock_keys.sender.return_value = 'mock_sender'
+    
+    client = Mock()
+    client.message.create.return_value = True
+    
+    takeaway = Takeaway()
+    takeaway.add_item(example_menu_item_rice)
+    takeaway.add_item(example_menu_item_rice)
+    takeaway.add_item(example_menu_item_coke)
+    takeaway.add_item_to_order(example_menu_item_rice)
+    takeaway.add_item_to_order(example_menu_item_rice)
+    takeaway.add_item_to_order(example_menu_item_coke)
+    assert takeaway.confirm_order() == "Rice, Rice - Total: £3.00"
+    assert takeaway.tracking_and_confirmation(client(mock_keys, mock_keys)) is True
